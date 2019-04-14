@@ -53,11 +53,11 @@ class User < ActiveRecord::Base
       favorites.find_by(micropost_id: micropost.id)
     end
 
-    def like(micropost)
+    def favorite(micropost)
       favorites.create(micropost_id: :micropost.id)
     end
 
-    def unlike(micropost)
+    def unfavorite(micropost)
       favorites.find_by(micropost_id: :micropost.id)
 
     end
