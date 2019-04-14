@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
                                     dependent:   :destroy
     has_many :follower_users, through: :follower_relationships, source: :follower
 
+    has_many :favorites
+    has_many :favorite_microposts, through: :favorites, source: :micropost
+
+
     # 他のユーザーをフォローする
     def follow(other_user)
       following_relationships.find_or_create_by(followed_id: other_user.id)
@@ -43,6 +47,19 @@ class User < ActiveRecord::Base
                          WHERE  follower_id = :user_id"
         Micropost.where("user_id IN (#{following_ids})
                          OR user_id = :user_id", user_id: id)
+    end
+
+    def favorite?(micropost)
+      favorites.find_by(micropost_id: micropost.id)
+    end
+
+    def like(micropost)
+      favorites.create(micropost_id: :micropost.id)
+    end
+
+    def unlike(micropost)
+      favorites.find_by(micropost_id: :micropost.id)
+
     end
 
 

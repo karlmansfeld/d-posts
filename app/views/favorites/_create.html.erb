@@ -1,0 +1,5 @@
+<%= link_to favorites_path(micropost_id: micropost.id), remote: true, method: :post, class: 'favorite-link' do %>
+  <button type="button" class="btn btn-default btn-sm">
+  <i class="glyphicon glyphicon-star"></i>
+  </button>
+<% end %>

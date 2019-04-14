@@ -3,7 +3,7 @@ class Micropost < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
-  validate :picture_size 
+  validate :picture_size
 
 
   private
@@ -12,6 +12,9 @@ class Micropost < ActiveRecord::Base
         errors.add(:picture, "should bu less than 5MB")
       end
   end
+
+  has_many :favorites
+  has_many :favoriting_users, through: :favorites, source: :user
 
 
 end
