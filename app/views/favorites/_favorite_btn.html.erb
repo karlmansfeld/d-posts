@@ -1,5 +1,6 @@
-<% if current_user.favorite?(micropost) %>
+<% if current_user.favpost?(micropost) %>
     <%= render 'favorites/destroy', micropost: micropost %>
+      <%= hidden_field_tag :micropost_id, micropost.id %>
 <% else %>
     <%= render 'favorites/create', micropost: micropost %>
 <% end %>

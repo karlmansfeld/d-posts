@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     has_many :follower_users, through: :follower_relationships, source: :follower
 
     has_many :favorites
-    has_many :favorite_microposts, through: :favorites, source: :micropost
+    has_many :favposts, through: :favorites, source: :micropost
 
 
     # 他のユーザーをフォローする
@@ -49,18 +49,23 @@ class User < ActiveRecord::Base
                          OR user_id = :user_id", user_id: id)
     end
 
-    def favorite?(micropost)
-      favorites.find_by(micropost_id: micropost.id)
+    def like(micropost)
+      favorites.find_or_create_by(micropost_id: micropost.id)
     end
 
-    def favorite(micropost)
-      favorites.create(micropost_id: :micropost.id)
-    end
 
-    def unfavorite(micropost)
-      favorites.find_by(micropost_id: :micropost.id)
+     def unlike(micropost)
+       favorite = favorites.find_by(micropost_id: micropost.id)
+       favorite.destroy if favorite
+     end
 
-    end
+
+     def  favpost?(micropost)
+       self.favposts.include?(micropost)
+     end
+
+
+
 
 
 end
