@@ -15,8 +15,14 @@
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
-       
+      
     <% end %>
-
+    <% if @user.favposts.any? %>
+      <ol class="microposts">
+         <% @user.favposts.each do |post| %>
+            <%= post.user.name %>
+            <%= post.favorites %>
+         <% end %>
+    <% end%>
   </div>
 </div>
