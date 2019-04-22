@@ -1,2 +1,1 @@
-$('#micropost_<%= @micropost.id %>').html('<%= escape_javascript(render("favorites/favorite_btn", micropost: @micropost)) %>')
-$('#favorites').text('<%= current_user.favorites.count %>')
+$("#favorite_btn").html("<%= escape_javscript(render('favorites/destroy')%>");

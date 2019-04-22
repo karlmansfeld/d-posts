@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
    @user = User.find(params[:id])
    @microposts = @user.microposts.order(created_at: :desc)
+   @favorites = @user.favposts.order(created_at: :desc)
  end
 
   def new

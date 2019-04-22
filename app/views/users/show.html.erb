@@ -18,11 +18,11 @@
       
     <% end %>
     <% if @user.favposts.any? %>
+      <h3>Favorites (<%= @user.favposts.count %>)</h3>
       <ol class="microposts">
-         <% @user.favposts.each do |post| %>
-            <%= post.user.name %>
-            <%= post.favorites %>
-         <% end %>
+          <%= render @favorites %>
+      </ol>
+         
     <% end%>
   </div>
 </div>
